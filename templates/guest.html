@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Продолжить как гость - Лав Кафé</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/auth.css">
+</head>
+<body class="page-enter">
+    <div class="auth-page">
+        <canvas id="auth-particles-canvas"></canvas>
+        
+        <div class="auth-card wide">
+            <svg aria-hidden="true" class="guest-icon" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="38" fill="none" stroke="#BB9457" stroke-width="2" opacity="0.3"/>
+                <circle cx="40" cy="30" r="12" fill="var(--color-gold)"/>
+                <path d="M 20 65 Q 20 45 40 45 Q 60 45 60 65" fill="var(--color-gold)"/>
+                <circle cx="40" cy="40" r="30" fill="none" stroke="#FFE6A7" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5"/>
+            </svg>
+            
+            <h1 class="auth-title">Режим гостя</h1>
+            <p class="auth-subtitle">Наслаждайтесь без регистрации</p>
+            
+            <div class="info-box">
+                <div class="info-section">
+                    <h4>Что вы можете делать:</h4>
+                    <ul class="info-list allowed">
+                        <li>Сканировать QR-код</li>
+                        <li>Просматривать меню</li>
+                        <li>Заказывать и оплачивать</li>
+                    </ul>
+                </div>
+                
+                <div class="info-section">
+                    <h4>Недоступно в режиме гостя:</h4>
+                    <ul class="info-list not-allowed">
+                        <li>История заказов</li>
+                        <li>Программа лояльности</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <form class="auth-form" id="guest-form">
+                <div class="form-group">
+                    <input type="text" id="guest-name" class="form-input">
+                    <label for="guest-name" class="form-label">Ваше имя (необязательно)</label>
+                </div>
+                
+                <button type="submit" class="auth-button golden">Продолжить как гость</button>
+            </form>
+            
+            <div class="auth-links">
+                <a href="register.html">Создать аккаунт</a>
+                <br>
+                <a href="login.html">Войти</a>
+                <a href="index.html" class="back-link">← Вернуться на главную</a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../static/js/main.js" defer></script>
+    <script src="../static/js/auth.js" defer></script>
+</body>
+</html>
