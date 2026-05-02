@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню - Лав Кафé</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Preload des ressources critiques -->
+    <link rel="preload" href="../static/css/base.css" as="style">
+    <link rel="preload" href="../static/css/menu.css" as="style">
+    <link rel="preload" href="../static/js/main.js" as="script">
+    <link rel="preload" href="../static/js/cart.js" as="script">
+    <link rel="preload" href="../static/js/menu.js" as="script">
+    
+    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/menu.css">
+</head>
+<body class="page-enter">
+    <a href="#main-content" class="skip-link">Перейти к содержанию</a>
+    
+    <!-- TOP NAVBAR -->
+    <nav class="navbar" role="navigation" aria-label="Основная навигация">
+        <div class="navbar-content">
+            <div class="navbar-left">
+                <a href="index.html" class="logo-text">Лав Кафé</a>
+            </div>
+            
+            <div class="navbar-center">
+            </div>
+            
+            <div class="navbar-right">
+                <button class="cart-toggle" id="cart-toggle-btn" type="button" aria-label="Корзина">
+                    <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-text">Корзина</span>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </button>
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN LAYOUT -->
+    <div class="main-layout">
+        <!-- CATEGORY SIDEBAR -->
+        <aside class="category-sidebar" id="category-sidebar">
+            <nav class="category-nav" id="category-nav"></nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content" role="main" id="main-content">
+            <!-- SEARCH BAR -->
+            <div class="search-bar">
+                <svg aria-hidden="true" class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    class="search-input" 
+                    placeholder="Найти блюдо..."
+                >
+                <button class="search-clear" id="search-clear" style="display: none;">×</button>
+            </div>
+
+            <!-- MENU SECTIONS -->
+            <div id="menu-container"></div>
+            
+            <!-- NO RESULTS MESSAGE -->
+            <div class="no-results" id="no-results" style="display: none;">
+                <svg aria-hidden="true" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="1">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <p>Блюда не найдены для "<span id="search-query"></span>"</p>
+            </div>
+        </main>
+
+        <!-- CART PANEL -->
+        <aside class="cart-panel" id="cart-panel" aria-label="Корзина">
+            <div class="cart-header">
+                <h3>Ваш выбор</h3>
+                <div class="cart-table-info" id="cart-table-info"></div>
+            </div>
+            <div class="cart-content" id="cart-content"></div>
+            <div class="cart-empty" id="cart-empty">
+                <svg aria-hidden="true" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 12h8"></path>
+                </svg>
+                <p>Корзина пуста. Выберите блюда из меню.</p>
+            </div>
+            <div class="cart-summary" id="cart-summary" style="display: none;">
+                <div class="summary-row total">
+                    <span>Итого</span>
+                    <span id="total">0 ₽</span>
+                </div>
+                <button class="checkout-btn" id="clear-cart-btn" type="button">Очистить выбор</button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Mobile overlay + bottom bar -->
+    <div class="cart-overlay" id="cart-overlay" aria-hidden="true"></div>
+    <div class="mobile-bottom-bar" id="mobile-bottom-bar">
+        <div class="bottom-bar-info">
+            <div class="bottom-bar-count" id="bottom-bar-count">0 позиций</div>
+            <div class="bottom-bar-total" id="bottom-bar-total">0 ₽</div>
+        </div>
+        <button class="bottom-bar-btn" id="bottom-bar-btn" type="button">Корзина</button>
+    </div>
+    
+    <script src="../static/js/main.js" defer></script>
+    <script src="../static/js/cart.js" defer></script>
+    <script src="../static/js/menu.js" defer></script>
+</body>
+</html>
