@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата - Лав Кафé</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Preload des ressources critiques -->
+    <link rel="preload" href="../static/css/base.css" as="style">
+    <link rel="preload" href="../static/css/payment.css" as="style">
+    <link rel="preload" href="../static/js/main.js" as="script">
+    <link rel="preload" href="../static/js/payment.js" as="script">
+    
+    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/payment.css">
+</head>
+<body class="page-enter">
+    <a href="#main-content" class="skip-link">Перейти к содержанию</a>
+    
+    <!-- TOP NAVBAR -->
+    <nav class="payment-navbar">
+        <div class="navbar-content">
+            <a href="menu.html" class="back-link">← Вернуться в меню</a>
+            <div class="navbar-center">
+                <a href="index.html" class="logo-text">Лав Кафé</a>
+            </div>
+            <div class="navbar-right">
+                <div class="table-badge" id="table-badge-nav">Стол <span id="table-number-nav">-</span></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="payment-container" id="main-content">
+        <!-- LEFT COLUMN - ORDER REVIEW -->
+        <div class="order-review-panel">
+            <h2 class="panel-title">Сводка заказа</h2>
+            
+            <div class="order-items" id="order-items">
+                <!-- Items will be rendered here -->
+            </div>
+            
+            <div class="empty-cart-warning" id="empty-cart-warning" style="display: none;">
+                <svg aria-hidden="true" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <p>Ваша корзина пуста</p>
+                <a href="menu.html" class="btn btn-outline">Вернуться в меню</a>
+            </div>
+            
+            <div class="order-totals" id="order-totals">
+                <div class="total-row">
+                    <span>Промежуточный итог</span>
+                    <span id="subtotal-amount">0 ₽</span>
+                </div>
+                <div class="total-row">
+                    <span>Обслуживание (10%)</span>
+                    <span id="service-amount">0 ₽</span>
+                </div>
+                <div class="total-divider"></div>
+                <div class="total-row total-final">
+                    <span>ИТОГО</span>
+                    <span id="total-amount">0 ₽</span>
+                </div>
+                <div class="order-meta">
+                    <div class="meta-item">Стол: №<span id="table-number">-</span></div>
+                    <div class="meta-item" id="order-timestamp">Заказ от ...</div>
+                </div>
+            </div>
+            
+            <div class="special-instructions">
+                <label for="instructions" class="instructions-label">Особые указания для кухни</label>
+                <textarea 
+                    id="instructions" 
+                    class="instructions-input" 
+                    placeholder="Аллергии, степень прожарки, примечания..."
+                    maxlength="200"
+                ></textarea>
+                <div class="char-counter"><span id="char-count">0</span>/200</div>
+            </div>
+            
+            <div class="reassurance-row">
+                <div class="reassurance-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <span>Безопасная оплата</span>
+                </div>
+                <div class="reassurance-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    <span>Мгновенный заказ</span>
+                </div>
+                <div class="reassurance-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span>Немедленное приготовление</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN - PAYMENT FORM -->
+        <div class="payment-form-panel">
+            <h2 class="panel-title">Выберите способ оплаты</h2>
+            
+            <div class="payment-methods">
+                <div class="payment-method-card" data-method="card" id="method-card">
+                    <div class="method-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="1.5">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                        </svg>
+                    </div>
+                    <div class="method-info">
+                        <div class="method-name">Банковская карта</div>
+                        <div class="method-subtitle">Карта Visa / Mastercard</div>
+                    </div>
+                    <div class="method-check">✓</div>
+                </div>
+                
+                <div class="payment-method-card" data-method="moncash" id="method-moncash">
+                    <div class="method-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="1.5">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                            <path d="M8 6h8M8 10h8M8 14h4" stroke-linecap="round"></path>
+                        </svg>
+                    </div>
+                    <div class="method-info">
+                        <div class="method-name">СБП</div>
+                        <div class="method-subtitle">Мобильный платеж</div>
+                    </div>
+                    <div class="method-check">✓</div>
+                </div>
+                
+                <div class="payment-method-card" data-method="cash" id="method-cash">
+                    <div class="method-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="1.5">
+                            <rect x="2" y="7" width="20" height="10" rx="2" ry="2"></rect>
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M18.5 9.5v5M5.5 9.5v5"></path>
+                        </svg>
+                    </div>
+                    <div class="method-info">
+                        <div class="method-name">Наличные</div>
+                        <div class="method-subtitle">Оплата наличными на кассе</div>
+                    </div>
+                    <div class="method-check">✓</div>
+                </div>
+            </div>
+            
+            <!-- CARD PAYMENT FORM -->
+            <div class="payment-form-section" id="form-card" style="display: none;">
+                <div class="form-group">
+                    <input type="text" id="card-number" class="form-input" maxlength="19" placeholder=" ">
+                    <label class="form-label">Номер карты</label>
+                    <div class="card-type-logo" id="card-type-logo"></div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="text" id="card-name" class="form-input" placeholder=" ">
+                    <label class="form-label">Имя владельца</label>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="card-expiry" class="form-input" maxlength="5" placeholder=" ">
+                        <label class="form-label">Срок действия (MM/ГГ)</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" id="card-cvv" class="form-input" maxlength="3" placeholder=" ">
+                        <label class="form-label">CVV</label>
+                        <button type="button" class="cvv-tooltip-btn" id="cvv-tooltip-btn">?</button>
+                        <div class="cvv-tooltip" id="cvv-tooltip">3 цифры на обратной стороне карты</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MONCASH PAYMENT FORM -->
+            <div class="payment-form-section" id="form-moncash" style="display: none;">
+                <div class="form-group">
+                    <div class="phone-prefix">🇭🇹 +509</div>
+                    <input type="tel" id="moncash-phone" class="form-input phone-input" maxlength="8" placeholder=" ">
+                    <label class="form-label phone-label">Номер телефона</label>
+                </div>
+                
+                <div class="moncash-info">
+                    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2">
+                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                    </svg>
+                    <p>Вы получите уведомление MonCash для подтверждения платежа</p>
+                </div>
+                
+                <div class="moncash-amount-card">
+                    <div class="moncash-label">Сумма к оплате</div>
+                    <div class="moncash-amount" id="moncash-total">0 ₽</div>
+                </div>
+            </div>
+            
+            <!-- CASH PAYMENT INFO -->
+            <div class="payment-form-section" id="form-cash" style="display: none;">
+                <div class="cash-info-card">
+                    <div class="cash-amount-label">Сумма для подготовки</div>
+                    <div class="cash-amount" id="cash-total">0 ₽</div>
+                    <div class="cash-message">
+                        Официант подойдет к вашему столу №<span id="cash-table">-</span> для подтверждения заказа
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CONFIRM BUTTON -->
+            <button class="confirm-payment-btn" id="confirm-btn" disabled>
+                <span class="btn-text" id="btn-text">Выберите способ оплаты</span>
+                <span class="btn-spinner" id="btn-spinner" style="display: none;">●●●</span>
+            </button>
+            
+            <div class="security-badge">
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span>100% безопасная оплата</span>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../static/js/main.js" defer></script>
+    <script src="../static/js/cart.js" defer></script>
+    <script src="../static/js/payment.js" defer></script>
+</body>
+</html>

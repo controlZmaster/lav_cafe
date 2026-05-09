@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статус заказа - Лав Кафé</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/order-status.css">
+</head>
+<body class="page-enter">
+    <div class="status-page">
+        <div class="status-container">
+            <!-- CONFIRMATION ANIMATION -->
+            <div class="confirmation-section">
+                <svg aria-hidden="true" class="checkmark-circle" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="circle-bg" cx="50" cy="50" r="45" fill="none" stroke="#BB9457" stroke-width="3"/>
+                    <path class="checkmark" d="M25 50 L40 65 L75 30" fill="none" stroke="#6F1D1B" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+                
+                <div class="sparkle-burst">
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                </div>
+                
+                <h1 class="confirmation-title">Заказ подтвержден!</h1>
+                <p class="confirmation-subtitle">Ваш заказ готовится</p>
+            </div>
+
+            <!-- ORDER DETAILS CARD -->
+            <div class="order-details-card">
+                <div class="order-header">
+                    <div class="order-id">Заказ №<span id="order-id">000000</span></div>
+                    <div class="order-time" id="order-time">Несколько мгновений назад</div>
+                </div>
+                
+                <div class="table-badge-center">
+                    Стол №<span id="order-table">-</span>
+                </div>
+                
+                <div class="order-items-list" id="order-items-list">
+                    <!-- Items will be rendered here -->
+                </div>
+                
+                <div class="order-separator"></div>
+                
+                <div class="order-total-row">
+                    <span>Итого</span>
+                    <span class="total-amount" id="order-total">0 ₽</span>
+                </div>
+            </div>
+
+            <!-- STATUS TRACKER -->
+            <div class="status-tracker-section">
+                <h2 class="tracker-title">Отслеживание вашего заказа</h2>
+                
+                <div class="status-stepper" role="list" aria-label="Этапы заказа">
+                    <div class="step completed" id="step-1" role="listitem">
+                        <div class="step-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-label">Заказ получен</div>
+                            <div class="step-time">Несколько секунд назад</div>
+                        </div>
+                        <div class="step-line"></div>
+                    </div>
+                    
+                    <div class="step active" id="step-2" role="listitem">
+                        <div class="step-icon">
+                            <div class="spinner"></div>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-label">Готовится</div>
+                            <div class="step-time">В процессе...</div>
+                        </div>
+                        <div class="step-line"></div>
+                    </div>
+                    
+                    <div class="step pending" id="step-3" role="listitem">
+                        <div class="step-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"/>
+                            </svg>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-label">Готово к подаче</div>
+                            <div class="step-time">Ожидание</div>
+                        </div>
+                        <div class="step-line"></div>
+                    </div>
+                    
+                    <div class="step pending" id="step-4" role="listitem">
+                        <div class="step-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-label">Подано</div>
+                            <div class="step-time">Ожидание</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESTIMATED TIME BOX -->
+            <div class="estimated-time-box">
+                <div class="time-icon">
+                    <svg aria-hidden="true" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="1.5">
+                        <circle cx="12" cy="13" r="9"></circle>
+                        <polyline points="12 7 12 13 15 15"></polyline>
+                        <path d="M16.5 3.5L19 6M7.5 3.5L5 6"></path>
+                    </svg>
+                </div>
+                <div class="time-value" id="countdown-display">15:00</div>
+                <div class="time-label">Ориентировочное время ожидания</div>
+                <div class="time-complete" id="time-complete" style="display: none;">
+                    <span class="bell-icon">
+                        <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                    </span>
+                    Ваш заказ должен быть готов!
+                </div>
+            </div>
+
+            <!-- ACTIONS ROW -->
+            <div class="actions-row">
+                <a href="menu.html" class="btn btn-outline">Заказать что-то еще</a>
+                <button class="btn btn-primary" id="call-server-btn">Позвать официанта</button>
+            </div>
+            
+            <a href="index.html" class="home-link">Вернуться на главную</a>
+
+            <!-- FOOTER NOTE -->
+            <div class="footer-note">
+                <svg aria-hidden="true" class="footer-ornament" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="15" x2="40" y2="15" stroke="#BB9457" stroke-width="1"/>
+                    <rect x="45" y="10" width="10" height="10" fill="none" stroke="#BB9457" stroke-width="1" transform="rotate(45 50 15)"/>
+                    <line x1="60" y1="15" x2="100" y2="15" stroke="#BB9457" stroke-width="1"/>
+                </svg>
+                <p>Спасибо за ваш визит — До скорой встречи в Лав Кафе</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast-notification" id="toast">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 6L9 17l-5-5"/>
+        </svg>
+        <span id="toast-message">Официант уведомлен для стола №<span id="toast-table">-</span></span>
+    </div>
+    
+    <script src="../static/js/main.js" defer></script>
+    <script src="../static/js/order-status.js" defer></script>
+</body>
+</html>
